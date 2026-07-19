@@ -1,0 +1,22 @@
+# Dependencies
+node_modules/
+
+# Environment variables (secrets, DB passwords, API keys — never commit these)
+.env
+.env.local
+.env.*.local
+
+# Build output
+dist/
+build/
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS/editor clutter
+.DS_Store
+.vscode/
+.idea/
+
+# Docker volumes are managed by Docker itself, not tracked in git
