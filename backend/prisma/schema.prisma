@@ -31,6 +31,7 @@ model Group {
   createdAt DateTime @default(now())
 
   members GroupMember[]
+  expenses Expense[]
 
   @@map("groups")
 }
@@ -49,6 +50,42 @@ model GroupMember {
   displayName String?
   role        GroupRole @default(MEMBER)
   joinedAt    DateTime  @default(now())
-
+  
+  expensesPaid  Expense[]      @relation("ExpensePayer")
+  expenseShares ExpenseShare[]
   @@map("group_members")
+}
+
+enum SplitType {
+  EQUAL
+  EXACT
+}
+
+model Expense {
+  id          String    @id @default(uuid())
+  group       Group     @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  groupId     String
+  paidBy      GroupMember @relation("ExpensePayer", fields: [paidById], references: [id])
+  paidById    String
+  description String
+  amountCents Int
+  splitType   SplitType @default(EQUAL)
+  spentAt     DateTime  @default(now())
+  createdAt   DateTime  @default(now())
+
+  shares ExpenseShare[]
+
+  @@map("expenses")
+}
+
+model ExpenseShare {
+  id            String  @id @default(uuid())
+  expense       Expense @relation(fields: [expenseId], references: [id], onDelete: Cascade)
+  expenseId     String
+  groupMember   GroupMember @relation(fields: [groupMemberId], references: [id], onDelete: Cascade)
+  groupMemberId String
+  amountCents   Int
+
+  @@unique([expenseId, groupMemberId])
+  @@map("expense_shares")
 }
