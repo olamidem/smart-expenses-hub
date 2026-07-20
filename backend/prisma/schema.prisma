@@ -31,7 +31,8 @@ model Group {
   createdAt DateTime @default(now())
 
   members GroupMember[]
-  expenses Expense[]
+   expenses    Expense[]
+  settlements Settlement[]
 
   @@map("groups")
 }
@@ -53,6 +54,8 @@ model GroupMember {
   
   expensesPaid  Expense[]      @relation("ExpensePayer")
   expenseShares ExpenseShare[]
+  settlementsFrom Settlement[]   @relation("SettlementFrom")
+  settlementsTo   Settlement[]   @relation("SettlementTo")
   @@map("group_members")
 }
 
@@ -88,4 +91,18 @@ model ExpenseShare {
 
   @@unique([expenseId, groupMemberId])
   @@map("expense_shares")
+}
+
+model Settlement {
+  id            String   @id @default(uuid())
+  group         Group    @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  groupId       String
+  fromMember    GroupMember @relation("SettlementFrom", fields: [fromMemberId], references: [id], onDelete: Cascade)
+  fromMemberId  String
+  toMember      GroupMember @relation("SettlementTo", fields: [toMemberId], references: [id], onDelete: Cascade)
+  toMemberId    String
+  amountCents   Int
+  settledAt     DateTime @default(now())
+
+  @@map("settlements")
 }
