@@ -17,3 +17,7 @@ export interface Group {
 export function getGroups() {
   return apiFetch<Group[]>("/groups");
 }
+
+export function getGroup(groupId: string) {
+  return apiFetch<Group>(`/groups/${groupId}`);
+}
