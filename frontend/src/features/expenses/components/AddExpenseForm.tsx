@@ -29,10 +29,9 @@ export function AddExpenseForm({
   const [error, setError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
 
-  function memberLabel(m: GroupMember) {
-    return m.displayName ?? "Member"; // real name resolution comes once we include user data
-  }
-
+ function memberLabel(m: GroupMember) {
+   return m.user?.name ?? m.displayName ?? "Unknown member";
+ }
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError(null);

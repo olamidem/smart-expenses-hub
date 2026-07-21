@@ -5,6 +5,7 @@ export interface GroupMember {
   userId: string | null;
   displayName: string | null;
   role: "ADMIN" | "MEMBER";
+  user: { id: string; name: string; email: string } | null;
 }
 
 export interface Group {
