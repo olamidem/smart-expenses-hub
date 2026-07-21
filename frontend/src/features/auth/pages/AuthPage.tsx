@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { login, register } from "../api";
-import { Label } from "@/src/shared/components/Label";
-import { Input } from "@/src/shared/components/Input";
-import { Button } from "@/src/shared/components/Button";
+import { Label } from "@/shared/components/Label";
+import { Input } from "@/shared/components/Input";
+import { Button } from "@/shared/components/Button";
+
 
 export function AuthPage({ onAuthenticated }: { onAuthenticated: () => void }) {
   const [mode, setMode] = useState<"login" | "register">("login");
