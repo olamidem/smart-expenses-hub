@@ -1,5 +1,8 @@
 import { useState } from "react";
-import { AuthPage } from "./src/features/auth/pages/AuthPage";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { AuthPage } from "./features/auth/pages/AuthPage";
+import { AppLayout } from "./shared/components/AppLayout";
+import { GroupsListPage } from "./features/groups/pages/GroupsListPage";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(
@@ -11,9 +14,14 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen bg-bg text-text p-8">
-      <p>Logged in! Groups list goes here next.</p>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route element={<AppLayout />}>
+          <Route path="/" element={<Navigate to="/groups" replace />} />
+          <Route path="/groups" element={<GroupsListPage />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
