@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthPage } from "./features/auth/pages/AuthPage";
 import { AppLayout } from "./shared/components/AppLayout";
 import { GroupsListPage } from "./features/groups/pages/GroupsListPage";
+import { GroupDetailPage } from "./features/groups/pages/GroupDetailPage";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(
@@ -19,6 +20,7 @@ function App() {
         <Route element={<AppLayout />}>
           <Route path="/" element={<Navigate to="/groups" replace />} />
           <Route path="/groups" element={<GroupsListPage />} />
+          <Route path="/groups/:groupId" element={<GroupDetailPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
