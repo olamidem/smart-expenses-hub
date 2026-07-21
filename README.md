@@ -1,4 +1,4 @@
-# 💰 Smart Finance Hub
+# 💰 Smart Expenses Hub
 
 > **A modern full-stack personal finance platform built with React 19, TypeScript, and NestJS, helping users manage income, expenses, budgets, and financial insights through a beautiful and intuitive interface.**
 
